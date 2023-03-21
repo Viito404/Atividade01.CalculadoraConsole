@@ -17,9 +17,9 @@
 
                #region Declaração da Array que será utilizada no histórico;
 
-               string[] dop = new string[100];
+               string[] historicoOperacoes = new string[100];
 
-               int qor = 0;
+               int quantidadeOperacoes = 0;
                #endregion
 
                do
@@ -40,13 +40,13 @@
                     Console.WriteLine("\nDigite = para ver o histórico; ");
                     Console.Write("\nDigite S para sair.\n\n> ");
 
-                    string op = Console.ReadLine();
+                    string opcao = Console.ReadLine();
 
                     #endregion
 
                     #region Opção para sair;
 
-                    if (op == "s" || op == "S")
+                    if (opcao == "s" || opcao == "S")
                     {
                          Console.ForegroundColor = ConsoleColor.Red;
                          Console.WriteLine("\nSaindo...");
@@ -58,7 +58,7 @@
 
                     #region Verifica se a opção desejada é válida;
 
-                    if (op != "+" && op != "-" && op != "=" && op != "/" && op != "*" && op != "s" && op != "S" && op != "#")
+                    if (opcao != "+" && opcao != "-" && opcao != "=" && opcao != "/" && opcao != "*" && opcao != "s" && opcao != "S" && opcao != "#")
                     {
                          Console.WriteLine("\nInsira um comando válido!");
                          Console.ReadLine();
@@ -69,16 +69,16 @@
 
                     #region Opção de tabuada; 
 
-                    if (op == "#")
+                    if (opcao == "#")
                     {
                          Console.Write("\nDigite a tabuada que deseja:\n\n> ");
-                         int tb = 0;
-                         tb = Convert.ToInt32(Console.ReadLine());
-                         Console.WriteLine($"\nTabuada do {tb}:");
+                         int tabuada = 0;
+                         tabuada = Convert.ToInt32(Console.ReadLine());
+                         Console.WriteLine($"\nTabuada do {tabuada}:");
                          for (int i = 1; i <= 10; i++)
                          {
-                              int res = i % 2;
-                              if (res == 0)
+                              int resto = i % 2;
+                              if (resto == 0)
 
                                    Console.ForegroundColor = ConsoleColor.Blue;
 
@@ -86,9 +86,9 @@
 
                                    Console.ForegroundColor = ConsoleColor.White;
 
-                              int rm = tb * i;
+                              int resultadoMultiplicacao = tabuada * i;
 
-                              Console.WriteLine("\n" +tb + " X " +i+ " = " +rm);
+                              Console.WriteLine("\n" +tabuada + " X " +i+ " = " +resultadoMultiplicacao);
 
                          }
 
@@ -102,16 +102,16 @@
 
                     #region Opção de histórico de operações;
 
-                    if (op == "=")
+                    if (opcao == "=")
                     {
                          Console.ForegroundColor = ConsoleColor.Cyan;
                          Console.WriteLine("\n=========<<Histórico>>=========\n");
                          Console.ForegroundColor = ConsoleColor.White;
 
-                         for (int i = 0; i < dop.Length; i++)
+                         for (int i = 0; i < historicoOperacoes.Length; i++)
                          {              
-                              if (dop[i] != null)
-                              Console.WriteLine($"\n{dop[i]}");
+                              if (historicoOperacoes[i] != null)
+                              Console.WriteLine($"\n{historicoOperacoes[i]}");
                          }
 
                          Console.ReadLine();
@@ -126,31 +126,31 @@
 
                     Console.Write("\nDigite o primeiro número:\n> ");
 
-                    double pn = Convert.ToDouble(Console.ReadLine());
+                    double primeiroNumero = Convert.ToDouble(Console.ReadLine());
 
                     Console.Write("\nDigite o segundo número:\n> ");
 
-                    double sn = Convert.ToDouble(Console.ReadLine());
+                    double segundoNumero = Convert.ToDouble(Console.ReadLine());
 
                     #endregion
 
                     #region Escolha de operações; 
 
-                    double rt = 0;
+                    double resultado = 0;
 
-                    switch (op)
+                    switch (opcao)
                     {
-                         case "+": rt = pn + sn; Console.ForegroundColor = ConsoleColor.Green; break;
-                         case "-": rt = pn - sn; Console.ForegroundColor = ConsoleColor.Magenta; break;
-                         case "*": rt = pn * sn; Console.ForegroundColor = ConsoleColor.DarkYellow; break;
+                         case "+": resultado = primeiroNumero + segundoNumero; Console.ForegroundColor = ConsoleColor.Green; break;
+                         case "-": resultado = primeiroNumero - segundoNumero; Console.ForegroundColor = ConsoleColor.Magenta; break;
+                         case "*": resultado = primeiroNumero * segundoNumero; Console.ForegroundColor = ConsoleColor.DarkYellow; break;
                          case "/":
                               {
-                                   while (sn == 0)
+                                   while (segundoNumero == 0)
                                    {
                                         Console.WriteLine("\nO segundo número não pode ser 0, tente novamente.");
                                         Console.ReadLine();
                                         Console.Write("\nDigite o segundo número:\n> ");
-                                        sn = Convert.ToDouble(Console.ReadLine());
+                                        segundoNumero = Convert.ToDouble(Console.ReadLine());
                                    }
 
                                    Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -164,16 +164,16 @@
 
                     #region Formatação e impressão de operadores;
 
-                    double rtf = Math.Round(rt, 2);
+                    double resultaoFormatado = Math.Round(resultado, 2);
 
-                    string sop = "";
+                    string sinalOperacao = "";
 
-                    switch (op)
+                    switch (opcao)
                     {
-                         case "+": sop = "+"; break;
-                         case "*": sop = "*"; break;
-                         case "/": sop = "/"; break;
-                         case "-": sop = "-"; break;
+                         case "+": sinalOperacao = "+"; break;
+                         case "*": sinalOperacao = "*"; break;
+                         case "/": sinalOperacao = "/"; break;
+                         case "-": sinalOperacao = "-"; break;
                          default: break;
                     }
 
@@ -181,13 +181,13 @@
 
                     #region Alocação da operação na Array e impressão dos resultados;
 
-                    dop[qor] = pn + " " + sop + " " + sn + " = " + rtf;
+                    historicoOperacoes[quantidadeOperacoes] = primeiroNumero + " " + sinalOperacao + " " + segundoNumero + " = " + resultaoFormatado;
 
-                    Console.WriteLine($"\nO resultado da operação é {rtf}");
+                    Console.WriteLine($"\nO resultado da operação é {resultaoFormatado}");
 
                     Console.ReadLine();
 
-                    qor++;
+                    quantidadeOperacoes++;
 
                     #endregion
 
